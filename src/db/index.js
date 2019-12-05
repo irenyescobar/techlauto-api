@@ -8,9 +8,7 @@ const config = {
   user: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASS, 
   ssl: true, 
-  max: 10,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
+  max: 10, 
 }
 
 const pool = new Pool(config)
