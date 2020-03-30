@@ -5,6 +5,7 @@ module.exports = {
   async index(req,res){
     
     const{ email } = req.body; 
+    const{ key } = req.body;
     const tablename = email.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
 
     db.getClient((err, client, done)=> {
@@ -13,7 +14,7 @@ module.exports = {
         res.status(503).json({ error: 'Fail connection to database client', details: err});
       } 
 
-      client.query('call get_code($1::text,$2::text); ', [email,tablename], (err, result) => {  
+      client.query('call get_code($1::text,$2::text,$3::text); ', [email,tablename,key], (err, result) => {  
         
         if (err) {
           done()
